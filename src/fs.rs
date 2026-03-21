@@ -68,7 +68,7 @@ impl<'a> DirMetadata<'_> {
 
     /// Multiple files can have the same name if they are in different dirs
     /// so using this method returns a [vector](Vec) of [FileMetadata]
-    pub fn get_file(&self, file_name: &'a str) -> Vec<&'a FileMetadata> {
+    pub fn get_file(&'a self, file_name: &'a str) -> Vec<&'a FileMetadata<'a>> {
         self.files()
             .iter()
             .filter(|file| file.name() == file_name)
@@ -76,7 +76,7 @@ impl<'a> DirMetadata<'_> {
     }
 
     /// Get a file by it's absolute path (from root)
-    pub fn get_file_by_path(&self, path: &'a str) -> Option<&'a FileMetadata> {
+    pub fn get_file_by_path(&'a self, path: &'a str) -> Option<&'a FileMetadata<'a>> {
         self.files()
             .iter()
             .find(|file| file.path() == Path::new(path))
