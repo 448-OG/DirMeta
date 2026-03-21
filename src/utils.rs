@@ -82,28 +82,19 @@ impl FsUtils {
     /// Get the duration between two TAI64N timestamps
     #[cfg(feature = "time")]
     pub fn tai64_duration(earlier_time: &Tai64N, current_time: &Tai64N) -> Option<Duration> {
-        match earlier_time.duration_since(current_time) {
-            Ok(valid_time) => Some(valid_time),
-            Err(_) => Option::None,
-        }
+        earlier_time.duration_since(current_time).ok()
     }
 
     /// Get the duration since UNIX EPOCH
     #[cfg(feature = "time")]
     pub fn tai64_duration_since_epoch(time: &Tai64N) -> Option<Duration> {
-        match time.duration_since(&Tai64N::UNIX_EPOCH) {
-            Ok(valid_time) => Some(valid_time),
-            Err(_) => Option::None,
-        }
+        time.duration_since(&Tai64N::UNIX_EPOCH).ok()
     }
 
     /// Get the duration since UNIX EPOCH
     #[cfg(feature = "time")]
     pub fn tai64_duration_from_now(earlier_time: &Tai64N) -> Option<Duration> {
-        match Tai64N::now().duration_since(earlier_time) {
-            Ok(valid_time) => Some(valid_time),
-            Err(_) => Option::None,
-        }
+        Tai64N::now().duration_since(earlier_time).ok()
     }
 }
 
