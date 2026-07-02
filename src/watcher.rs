@@ -28,7 +28,8 @@ pub type FsSender = Sender<WatcherOutcome>;
 ///
 /// #### Example
 /// ```rust
-/// use dir_meta::{inotify::WatchMask, smol::channel, FsWatcher, WatcherOutcome};
+/// use dir_meta::{inotify::WatchMask, FsWatcher, WatcherOutcome};
+/// use smol::channel;
 ///
 /// smol::block_on(async {
 ///     let (sender, receiver) = channel::unbounded::<WatcherOutcome>();
