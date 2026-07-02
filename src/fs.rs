@@ -57,7 +57,12 @@ impl<'a> DirMetadata<'_> {
 
     /// Create a new instance of [Self]
     pub fn new_path_buf(path: PathBuf) -> Self {
-        let name = Cow::Owned(path.file_name().unwrap().to_string_lossy().to_string());
+        let name = path
+            .file_name()
+            .map(|inner| inner.to_string_lossy().to_string())
+            .unwrap_or("..".to_string());
+
+        let name = Cow::Owned(name);
 
         Self {
             path,
